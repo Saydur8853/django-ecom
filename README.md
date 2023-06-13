@@ -19,8 +19,8 @@
 
 - For the main project's urls.py file:
 
-  1.Admin site: http://127.0.0.1:8000/admin/
-  2.Home page: http://127.0.0.1:8000/
+  1. Admin site: http://127.0.0.1:8000/admin/
+  2. Home page: http://127.0.0.1:8000/
   
 - Product-related APIs:
   1. Get all products: http://127.0.0.1:8000/api/products/
