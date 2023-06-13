@@ -1,6 +1,8 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,8 +18,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+env = environ.Env(
+    # set casting, default value
+    SSL_STORE_ID=(str, ""),
+    SSL_STORE_PASS=(str, ""),
+)
 
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 # Application definition
+SSL_STORE_ID = env("SSL_STORE_ID")
+SSL_STORE_PASS = env("SSL_STORE_PASS")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

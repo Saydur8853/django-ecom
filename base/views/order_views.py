@@ -127,3 +127,65 @@ class UpdateOrderToDeliveredAPIView(APIView):
         order.save()
 
         return Response("Order was delivered")
+
+
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from sslcommerz_client.client import SSLCommerzClient
+from django.shortcuts import redirect
+
+
+class PaymentInitAPIView(APIView):
+    def post(self, request):
+        client = SSLCommerzClient(
+            store_id=settings.SSL_STORE_ID,
+            store_passwd=settings.SSL_STORE_PASS,
+            sandbox=True,
+        )
+        # serializer = PaymentInitSerializer(data=request.data, many=False)
+        # if serializer.is_valid():
+        #     amount = serializer.validated_data["amount"]
+        #     donation_steam = serializer.validated_data["donation_stream"]
+        #     name = serializer.validated_data["name"]
+        #     email = serializer.validated_data["email"]
+        #     reminder = serializer.validated_data["reminder"]
+
+        #     url = request.build_absolute_uri(reverse("payment-status"))
+
+        #     steam = DonationStream.objects.get(id=int(donation_steam))
+
+        #     tran_id = tran_id_generator()
+        #     tran_obj = Transaction.objects.create(tran_id=tran_id, amount=amount)
+
+        #     order_obj = Order.objects.create(
+        #         transaction=tran_obj,
+        #         amount=amount,
+        #         donation_steam=steam,
+        #         name=name,
+        #         email=email,
+        #         reminder=reminder,
+        #     )
+
+        #     post_data = {
+        #         "total_amount": amount,
+        #         "currency": "BDT",
+        #         "tran_id": tran_id,
+        #         "product_category": "donation",
+        #         "success_url": url,
+        #         "fail_url": url,
+        #         "cancel_url": url,
+        #         "cus_name": name,
+        #         "cus_email": email,
+        #         "shipping_method": "NO",
+        #         "num_of_item": 1,
+        #         "product_name": "donation",
+        #         "product_category": "donation",
+        #         "product_profile": "general",
+        #         "cus_add1": "Some Address",
+        #         "cus_city": "Dhaka",
+        #         "cus_country": "Bangladesh",
+        #         "cus_phone": "01XX-XXXXXXX",
+        #     }
+
+        #     res = client.initiateSession(post_data)
+        #     return Response(data=res.response.dict())
