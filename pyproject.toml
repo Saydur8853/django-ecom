@@ -78,3 +78,12 @@ build-backend = "pdm.backend"
 dev = [
     "ipython>=8.14.0",
 ]
+
+[tool.pdm.scripts]
+start = "python manage.py runserver"
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
+createsuperuser = "python manage.py createsuperuser"
+startproject = "django-admin startproject {args} ."
+startapp = "python manage.py startapp {args}"
+shell = "python manage.py shell"
